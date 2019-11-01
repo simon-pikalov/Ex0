@@ -1,6 +1,3 @@
-
-package myMath;
-
 import java.util.Comparator;
 
 /**
@@ -46,24 +43,117 @@ public class Monom implements function{
 	} 
 	public boolean isZero() {return this.get_coefficient() == 0;}
 	// ***************** add your code below **********************
-   1
+
+	
+	/**The monot constractor. make a monom out of string, there are two main casses in the first one where the String has at list
+	 * an x with power of one, and the second case is where we have only real numbers...........matanya feel this up pleas ;)
+	 * 
+	 * @param s
+	 */
+	public Monom(String s) {
+	double coff=0;
+	int pow=0;
+	String sCoff="";
+	String sPow="";
+
+	if (!s.contains("x")){
+//        Double.parseDouble(s)>=0||Double.parseDouble(s)<0)
+            coff=Double.parseDouble(s);
+            this.set_power(0);
+            this.set_coefficient(coff);
+    }
+
+		if (s.charAt(0)=='x') {
+		    this.set_coefficient(1);
+			if (s.length()==1) {this.set_power(1);}
+			else {
+				sPow=s.substring(s.indexOf('^')+1);
+				pow=Integer.parseInt(sPow);
+				this.set_power(pow);
+			}
+		}
+
+		if (s.charAt(0)=='-'&&s.charAt(1)=='x') { this.set_coefficient(-1);
+			if (s.length()==2) {this.set_power(1);}
+			else {
+				sPow=s.substring(s.indexOf('^')+1);
+				pow=Integer.parseInt(sPow);
+				this.set_power(pow);
+			}
+		}
+
+//        else if (Double.parseDouble(s)>=0||Double.parseDouble(s)<0){
+//                this.set_power(0);
+//                this.set_coefficient(Double.parseDouble(s));
+//        }
+
+        else if (s.charAt(s.length()-1)=='x'){
+            this.set_power(1);
+                sCoff=s.substring(0,'x');
+                coff=Double.parseDouble(sCoff);
+                this.set_coefficient(coff);
+        }
+        else{
+            sCoff=s.substring(0,'x');
+            coff=Double.parseDouble(sCoff);
+            this.set_coefficient(coff);
+            sPow=s.substring(s.indexOf('^')+1);
+            pow=Integer.parseInt(sPow);
+            this.set_power(pow);
+        }
+
+
+
+
+
+
+
+	}
 	
 	public void add(Monom m) {
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-   }
 	
-	public void multipy(Monom d) {;}
+		//case 1 they have same coeficent
+		if (this._coefficient==m._coefficient) {
+			this._coefficient+=m._coefficient; // adding bouth coeficient 
+		}
+		
+		
+		// when the user tries to add a difrrent coeficent monoms that woud have make a polynom
+		else {
+			{throw new RuntimeException("your addind a diffrent coeficent monom, use the polynom function ! "+p);}
+			
+		}
+		
+		
+		
+		
+		
+	}
+	
+	public void multipy(Monom d) {
+		
+		//case 1 they have same coeficent * the coeficent's 
+		if (this._coefficient==m._coefficient) {
+			this._coefficient*=m._coefficient; // multyplieng bouth coeficient 
+		}
+		
+		
+		// when the user tries to add a difrrent coeficent monoms that woud have make a polynom
+		else {
+			{throw new RuntimeException("your addind a diffrent coeficent monom, use the polynom function ! "+p);}
+			
+		}	
+		
+		
+		
+		
+		
+		
+		
+	}
 	
 	public String toString() {
-		String ans = "";
+		String ans = this._coefficient+"x^"+this._power;
 		return ans;
 	}
 	// you may (always) add other methods.
